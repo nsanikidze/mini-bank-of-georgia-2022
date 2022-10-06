@@ -1,0 +1,33 @@
+<form class="ui form" [formGroup]="loginForm" (ngSubmit)="OnSubmitForm()" >
+  <div class="field">
+    <div class="ui left icon input userName">
+      <i class="user icon"></i>
+      <input type="text" placeholder="მომხმარებელი" formControlName="userName">
+    </div>
+    <div *ngIf="get('userName').touched" class="error">
+      <p *ngIf="get('userName').errors?.required">ველი აუცილებელია</p>
+      <p *ngIf="get('userName').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
+      <p *ngIf="get('userName').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
+      <p *ngIf="get('userName').errors?.forbiddenValue">გთხოვთ დაიცვათ შაბლობი 'სფეისების გარეშე'</p>
+    </div>
+  </div>
+  <div class="field">
+    <div class="ui left icon input">
+      <i class="lock icon"></i>
+      <input type="password" placeholder="პაროლი" formControlName="password">
+    </div>
+    <div *ngIf="get('password').touched" class="error">
+      <p *ngIf="get('password').errors?.required">ველი აუცილებელია</p>
+      <p *ngIf="get('password').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
+      <p *ngIf="get('password').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
+    </div>
+  </div>
+  <div>
+    <a href="/auth/register">
+      <span class="ui orange text">რეგისტრაცია</span>
+    </a>
+    <button class="ui basic orange right floated button" type="submit">
+      <i class="sign in alternate icon"></i>შესვლა </button>
+  </div>
+</form>
+
