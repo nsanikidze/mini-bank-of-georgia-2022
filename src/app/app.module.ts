@@ -14,6 +14,7 @@ import { AuthorizationComponent } from './shared/authorization/authorization.com
 import { LoaderComponent } from './shared/loader/loader.component';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {UrlInterceptorService} from './shared/url-interseptor.service';
+import {AuthInterceptorService} from './shared/authorization/auth-interseptor.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,11 @@ import {UrlInterceptorService} from './shared/url-interseptor.service';
     HttpClientModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UrlInterceptorService,
