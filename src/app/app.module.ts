@@ -12,6 +12,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthorizationComponent } from './shared/authorization/authorization.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {UrlInterceptorService} from './shared/url-interseptor.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,16 @@ import { LoaderComponent } from './shared/loader/loader.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

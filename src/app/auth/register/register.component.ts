@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Validators} from '../../shared/validators';
+import {Component, OnChanges, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {BgValidators} from '../../shared/validators';
+import {AuthService} from '../../shared/authorization/auth.service';
 
 @Component({
   selector: 'bg-register',
@@ -11,24 +12,24 @@ export class RegisterComponent implements OnInit {
   signUpForm: FormGroup;
   passwordsMatched = true;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      name: new FormControl(undefined, [Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.forbiddenSpaceValidator]),
-      userName: new FormControl(undefined, [Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.forbiddenSpaceValidator]),
-      password: new FormControl(undefined, [Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(30)]),
-      confirmPassword: new FormControl(undefined, [Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(30)]),
+      name: new FormControl(undefined, [BgValidators.required,
+        BgValidators.minLength(2),
+        BgValidators.maxLength(30),
+        BgValidators.forbiddenSpaceValidator]),
+      userName: new FormControl(undefined, [BgValidators.required,
+        BgValidators.minLength(2),
+        BgValidators.maxLength(30),
+        BgValidators.forbiddenSpaceValidator]),
+      password: new FormControl(undefined, [BgValidators.required,
+        BgValidators.minLength(2),
+        BgValidators.maxLength(30)]),
+      confirmPassword: new FormControl(undefined, [BgValidators.required,
+        BgValidators.minLength(2),
+        BgValidators.maxLength(30)]),
     });
   }
 
@@ -37,7 +38,19 @@ export class RegisterComponent implements OnInit {
     console.log(this.signUpForm);
     if (this.get('password').value !== this.get('confirmPassword').value){
       this.passwordsMatched = false;
+      return;
     }
+    this.passwordsMatched = true;
+
+    if (this.signUpForm.invalid){
+      return;
+    }
+
+    const name = this.get('name').value;
+    const userName = this.get('userName').value;
+    const password = this.get('password').value;
+
+    this.auth.register(name, userName, password).subscribe((userdata) => console.log(userdata));
   }
 
   get(controlName){
@@ -49,4 +62,5 @@ export class RegisterComponent implements OnInit {
       return Object.values(this.get(controlName).errors);
     }
   }
+
 }

@@ -1,7 +1,7 @@
 import {AbstractControl, FormControl, Validators} from '@angular/forms';
 import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 
-export class Validators extends Validators {
+export class BgValidators extends Validators {
 
 
   static required(control){

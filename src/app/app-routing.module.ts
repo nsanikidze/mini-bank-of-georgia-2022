@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ShellComponent } from './shell/shell.component';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
+import {AppComponent} from './app.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AuthComponent,
+    component: AppComponent,
     children: []
   },
   {
