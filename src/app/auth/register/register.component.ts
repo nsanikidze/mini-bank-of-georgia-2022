@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Validators} from '../../shared/validators';
 
 @Component({
   selector: 'bg-register',
@@ -17,11 +18,11 @@ export class RegisterComponent implements OnInit {
       name: new FormControl(undefined, [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
-        this.forbiddenSpaceValidator.bind(this)]),
+        Validators.forbiddenSpaceValidator]),
       userName: new FormControl(undefined, [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
-        this.forbiddenSpaceValidator.bind(this)]),
+        Validators.forbiddenSpaceValidator]),
       password: new FormControl(undefined, [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30)]),
@@ -31,13 +32,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  forbiddenSpaceValidator(controlName: FormControl ){
-    if ( controlName.value !== null){
-      if (controlName.value.includes(' ') && controlName.value.length > 1 && controlName.value.length < 30){
-        return {forbiddenValue: true};
-      }
-    }
-  }
 
   OnSubmitForm(){
     console.log(this.signUpForm);
@@ -48,5 +42,11 @@ export class RegisterComponent implements OnInit {
 
   get(controlName){
     return this.signUpForm.get(controlName);
+  }
+
+  getErrors(controlName){
+    if (this.get(controlName).errors){
+      return Object.values(this.get(controlName).errors);
+    }
   }
 }

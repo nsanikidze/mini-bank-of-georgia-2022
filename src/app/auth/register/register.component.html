@@ -5,10 +5,9 @@
       <input type="text" placeholder="სახელი" formControlName="name">
     </div>
     <div *ngIf="get('name').touched" class="error">
-      <p *ngIf="get('name').errors?.required">ველი აუცილებელია</p>
-      <p *ngIf="get('name').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
-      <p *ngIf="get('name').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
-      <p *ngIf="get('name').errors?.forbiddenValue">გთხოვთ დაიცვათ შაბლობი 'სფეისების გარეშე'</p>
+      <ng-container *ngFor="let errorMessage of getErrors('name')">
+        <span class="ui red text">{{errorMessage}}</span>
+      </ng-container>
     </div>
   </div>
   <div class="field">
@@ -17,10 +16,9 @@
       <input type="text" placeholder="მომხმარებელი" formControlName="userName">
     </div>
     <div *ngIf="get('userName').touched" class="error">
-      <p *ngIf="get('userName').errors?.required">ველი აუცილებელია</p>
-      <p *ngIf="get('userName').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
-      <p *ngIf="get('userName').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
-      <p *ngIf="get('userName').errors?.forbiddenValue">გთხოვთ დაიცვათ შაბლობი 'სფეისების გარეშე'</p>
+      <ng-container *ngFor="let errorMessage of getErrors('userName')">
+        <span class="ui red text">{{errorMessage}}</span>
+      </ng-container>
     </div>
   </div>
   <div class="field">
@@ -29,9 +27,9 @@
       <input type="password" placeholder="პაროლი" formControlName="password">
     </div>
     <div *ngIf="get('password').touched" class="error">
-      <p *ngIf="get('password').errors?.required">ველი აუცილებელია</p>
-      <p *ngIf="get('password').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
-      <p *ngIf="get('password').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
+      <ng-container *ngFor="let errorMessage of getErrors('password')">
+        <span class="ui red text">{{errorMessage}}</span>
+      </ng-container>
     </div>
   </div>
   <div class="field">
@@ -40,9 +38,9 @@
       <input type="password" placeholder="გაიმეორეთ პაროლი" formControlName="confirmPassword">
     </div>
     <div *ngIf="get('confirmPassword').touched" class="error">
-      <p *ngIf="get('confirmPassword').errors?.required">ველი აუცილებელია</p>
-      <p *ngIf="get('confirmPassword').errors?.maxlength">გთხოვთ შეიყვანოთ მაქსიმუმ 30 სიმბოლო</p>
-      <p *ngIf="get('confirmPassword').errors?.minlength">გთხოვთ შეიყვანოთ მინიმუმ 2 სიმბოლო</p>
+      <ng-container *ngFor="let errorMessage of getErrors('confirmPassword')">
+        <span class="ui red text">{{errorMessage}}</span>
+      </ng-container>
     </div>
     <div *ngIf="!passwordsMatched" class="error">
       <p>პაროლები არ ემთხვევა</p>

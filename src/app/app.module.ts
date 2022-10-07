@@ -10,6 +10,8 @@ import { ShellHeaderComponent } from './shell/shell-header/shell-header.componen
 import { ShellSidebarComponent } from './shell/shell-sidebar/shell-sidebar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthorizationComponent } from './shared/authorization/authorization.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { RegisterComponent } from './auth/register/register.component';
     ShellHeaderComponent,
     ShellSidebarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthorizationComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
