@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LoaderService} from '../loader/loader.service';
 import {AuthResponseModel} from './auth-response.model';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Subject, throwError} from 'rxjs';
 import {User} from './user.model';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class AuthService {
       })
       .pipe(
         this.loaderService.useLoader,
+        catchError((err) => throwError(err.error)),
         tap((userData) =>  this.handleAuth(userData))
       );
   }
@@ -37,6 +38,7 @@ export class AuthService {
       })
       .pipe(
         this.loaderService.useLoader,
+        catchError((err) => throwError(err.error)),
         tap((userData) =>  this.handleAuth(userData))
       );
   }

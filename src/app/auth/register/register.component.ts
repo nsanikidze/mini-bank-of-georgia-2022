@@ -1,7 +1,8 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../shared/validators';
 import {AuthService} from '../../shared/authorization/auth.service';
+import {AuthComponent} from '../auth.component';
 
 @Component({
   selector: 'bg-register',
@@ -11,8 +12,10 @@ import {AuthService} from '../../shared/authorization/auth.service';
 export class RegisterComponent implements OnInit {
   signUpForm: FormGroup;
   passwordsMatched = true;
+  error;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private authComponent: AuthComponent) { }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -50,7 +53,15 @@ export class RegisterComponent implements OnInit {
     const userName = this.get('userName').value;
     const password = this.get('password').value;
 
-    this.auth.register(name, userName, password).subscribe((userdata) => console.log(userdata));
+    this.auth.register(name, userName, password).subscribe(
+      resData => {
+        console.log(resData);
+      },
+      error => {
+        this.authComponent.error = error;
+      }
+    );
+    this.signUpForm.reset();
   }
 
   get(controlName){
@@ -62,5 +73,4 @@ export class RegisterComponent implements OnInit {
       return Object.values(this.get(controlName).errors);
     }
   }
-
 }
