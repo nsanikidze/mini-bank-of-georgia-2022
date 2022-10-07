@@ -14,38 +14,26 @@ import { AuthorizationComponent } from './shared/authorization/authorization.com
 import { LoaderComponent } from './shared/loader/loader.component';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {UrlInterceptorService} from './shared/url-interseptor.service';
-import {AuthInterceptorService} from './shared/authorization/auth-interseptor.service';
+import {AuthInterceptorService} from './shared/auth-interseptor.service';
+import {AuthModule} from './auth/auth.modul';
+import {SharedModule} from './shared/shared.module';
+import {CoreModule} from './core.module';
+import {ShellModule} from './shell/shell.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthComponent,
-    ShellComponent,
-    ShellHeaderComponent,
-    ShellSidebarComponent,
-    LoginComponent,
-    RegisterComponent,
-    AuthorizationComponent,
-    LoaderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: UrlInterceptorService,
-      multi: true
-    }
+    HttpClientModule,
+    AuthModule,
+    SharedModule,
+    CoreModule,
+    ShellModule
   ],
   bootstrap: [AppComponent]
 })

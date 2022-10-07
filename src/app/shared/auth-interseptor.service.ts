@@ -1,6 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthService} from './auth.service';
+import {AuthService} from './authorization/auth.service';
 import {switchMap, take} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
