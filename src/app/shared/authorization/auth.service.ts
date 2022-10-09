@@ -5,22 +5,26 @@ import {AuthResponseModel} from './auth-response.model';
 import {BehaviorSubject, Subject, throwError} from 'rxjs';
 import {User} from './user.model';
 import {catchError, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  timer = 2000;
+
   user = new BehaviorSubject<User>(undefined);
 
   constructor(private http: HttpClient,
-              private loaderService: LoaderService) { }
+              private loaderService: LoaderService,
+              private router: Router) { }
 
-  register(name, username, password){
+  register(name, userName, password){
     return this.http
       .post<AuthResponseModel>('register', {
         name,
-        username,
+        userName,
         password,
       })
       .pipe(
@@ -43,6 +47,16 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this.user.next(undefined);
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.timer = undefined;
+  }
+
   handleAuth = (resData: AuthResponseModel) => {
     const user = new User(
       resData.name,
@@ -52,5 +66,28 @@ export class AuthService {
       new Date(resData.expirationDate)
     );
     this.user.next(user);
-  };
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  autoLogin() {
+    const responseData = JSON.parse(localStorage.getItem('userData'));
+    console.log('resData' + responseData);
+
+    if (!responseData){
+      return;
+    }
+    const user = new User(
+    responseData.name,
+    responseData.username,
+    responseData.image,
+    responseData._token,
+      new Date(responseData._expirationDate)
+    );
+
+    if (!responseData._token){
+      return;
+    }
+    console.log(responseData.username);
+    this.user.next(user);
+  }
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ShellComponent} from '../shell.component';
+import {AuthService} from '../../shared/authorization/auth.service';
+import {AuthResponseModel} from '../../shared/authorization/auth-response.model';
 
 @Component({
   selector: 'bg-shell-header',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShellHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private shell: ShellComponent,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
+
   }
+
+  logout(){
+    this.shell.isUserLoggedIn = false;
+    this.auth.logout();
+  }
+
 
 }

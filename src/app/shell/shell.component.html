@@ -1,6 +1,14 @@
 <div class="shell">
   <bg-shell-header></bg-shell-header>
-  <bg-shell-sidebar></bg-shell-sidebar>
+  <bg-shell-sidebar>
+    <div class="user-info">
+      <div class="user-image">
+        <img  src="{{userData.image}}">
+      </div>
+      <p>{{userData.name}}</p>
+    </div>
+    <p class="username">{{userData.username}}<p>
+  </bg-shell-sidebar>
   <div class="shell__content">
     <div class="ui container">
       <div class="shell__content__operation-date">საოპერაციო თარიღი: {{ curDate }}<hr></div>

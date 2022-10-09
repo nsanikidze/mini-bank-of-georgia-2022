@@ -26,3 +26,35 @@ $white: #fff;
     }
   }
 }
+
+
+.user-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-image{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  overflow: hidden;
+}
+
+.user-image > img{
+  width: 100%;
+  height: 100%;
+}
+
+.user-info > p{
+  font-size: 23px;
+  font-weight: 700;
+  align-items: center;
+  color: #ffffff;
+}
+
+.username{
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 14px;
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../shared/validators';
 import {AuthService} from '../../shared/authorization/auth.service';
 import {AuthComponent} from '../auth.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'bg-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private auth: AuthService,
-              private authComponent: AuthComponent) { }
+              private authComponent: AuthComponent,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(userName, password).subscribe(
       resData => {
         console.log(resData);
+        this.router.navigate(['/']);
       },
       error => {
         this.authComponent.error = error;

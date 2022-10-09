@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../shared/validators';
 import {AuthService} from '../../shared/authorization/auth.service';
 import {AuthComponent} from '../auth.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'bg-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   error;
 
   constructor(private auth: AuthService,
-              private authComponent: AuthComponent) { }
+              private authComponent: AuthComponent,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -56,6 +58,7 @@ export class RegisterComponent implements OnInit {
     this.auth.register(name, userName, password).subscribe(
       resData => {
         console.log(resData);
+        this.router.navigate(['/']);
       },
       error => {
         this.authComponent.error = error;
