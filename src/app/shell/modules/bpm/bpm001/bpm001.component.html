@@ -1,0 +1,49 @@
+<div class="ui segments">
+  <div class="ui segment">
+    <h1>კლიენტის რეგისტრაცია</h1>
+  </div>
+  <div class="ui segment">
+    <form [formGroup]="clientRegistrationForm"  class="ui form" (ngSubmit)="OnSubmitForm()">
+      <div class="ui three column grid">
+        <div class="field">
+          <div class="nine wide field">
+            <label>სახელი</label>
+            <input type="text" formControlName="name">
+          </div>
+          <div *ngIf="get('name').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('name')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="field">
+          <div class="nine wide field">
+            <label>გვარი</label>
+            <input type="text" formControlName="lastName">
+          </div>
+          <div *ngIf="get('lastName').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('lastName')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="field">
+          <div class="nine wide field">
+            <label>Plus ქულები</label>
+            <input type="number" formControlName="plusPoints" >
+          </div>
+          <div *ngIf="get('plusPoints').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('plusPoints')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <button type="submit" class="ui blue icon button">
+          <i class="save icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

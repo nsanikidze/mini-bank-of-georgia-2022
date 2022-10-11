@@ -27,4 +27,12 @@ export class BgValidators extends Validators {
        return {forbiddenValue: `გთხოვთ დაიცვათ შაბლობი 'სფეისების გარეშე'`};
     }
   }
+
+  static min(minNumber) {
+    return (control) =>
+      super.min(minNumber)(control)
+        ? { minValue: `მინიმალური მნიშვნელობა უნდა იყოს ${minNumber}` }
+        : undefined;
+  }
+
 }
