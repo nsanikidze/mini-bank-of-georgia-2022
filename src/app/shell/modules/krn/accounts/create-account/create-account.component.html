@@ -1,0 +1,38 @@
+<div class="ui segments">
+  <div class="ui segment">
+    <h1>ანგარიშის შექმნა</h1>
+  </div>
+  <div class="ui segment">
+    <form [formGroup]="accountCreatorForm"  class="ui form" (ngSubmit)="OnSubmitForm()">
+      <div class="ui two column grid">
+        <div class="field">
+          <div class="nine wide field">
+            <label>ანგარიშის სახელი</label>
+            <input type="text" formControlName="accountName">
+          </div>
+          <div *ngIf="get('accountName').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('accountName')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="field">
+          <div class="nine wide field">
+            <label>თანხა</label>
+            <input type="number" formControlName="amount" >
+          </div>
+          <div *ngIf="get('amount').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('amount')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <button type="submit" class="ui blue icon button" (click)="moveAccount()">
+          <i class="save icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

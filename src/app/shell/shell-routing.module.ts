@@ -4,8 +4,9 @@ import { ShellComponent } from './shell.component';
 import {Bpm000Component} from './modules/bpm/bpm000/bpm000.component';
 import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
 import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
-import {KrnAccountsComponent} from './modules/krn/krn-accounts/krn-accounts.component';
+import {AccountsComponent} from './modules/krn/accounts/accounts.component';
 import {KrnOperationsComponent} from './modules/krn/krn-operations/krn-operations.component';
+import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,11 @@ const routes: Routes = [
       },
       {
         path: 'accounts',
-        component: KrnAccountsComponent
+        component: AccountsComponent
+      },
+      {
+        path: 'addAccount',
+        component: CreateAccountComponent
       },
       {
         path: 'operations',

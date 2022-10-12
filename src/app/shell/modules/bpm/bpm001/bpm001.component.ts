@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../shared/validators';
-import {ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
+import {PostsService} from '../../posts.service';
 
 @Component({
   selector: 'bg-bpm001',
@@ -11,8 +12,14 @@ import {ActivatedRoute} from '@angular/router';
 export class Bpm001Component implements OnInit {
 
   clientRegistrationForm: FormGroup;
+  client: {
+    firstName: string,
+    lastName: string,
+    plusPoints: number
+  };
 
-  constructor() { }
+  constructor(private postsService: PostsService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.clientRegistrationForm = new FormGroup({
@@ -27,15 +34,20 @@ export class Bpm001Component implements OnInit {
   }
 
   OnSubmitForm(){
+
     if (this.clientRegistrationForm.invalid){
       return;
     }
+    this.client = {
+      firstName: this.get('name').value,
+      lastName: this.get('lastName').value,
+      plusPoints: this.get('plusPoints').value
+    };
 
-    const name = this.get('name').value;
-    const lastName = this.get('lastName').value;
-    const plusPoints = this.get('plusPoints').value;
+    this.postsService.addClientPost(this.client).subscribe();
 
-    console.log(name + lastName + plusPoints);
+    this.router.navigate(['/bpm000']);
+
   }
 
   get(controlName){

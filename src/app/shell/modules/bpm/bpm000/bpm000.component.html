@@ -40,7 +40,7 @@
         </thead>
         <tbody *ngFor="let client of clients">
           <tr class="client" (click)="moveClient(client)" >
-            <td>{{client.name}}</td>
+            <td>{{client.firstName}}</td>
             <td>{{client.lastName}}</td>
             <td>{{client.clientKey}}</td>
           </tr>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BpmClient} from '../bpm.model';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {PostsService} from '../../posts.service';
+import {Client} from '../../client.model';
 
 @Component({
   selector: 'bg-bpm000',
@@ -11,16 +14,17 @@ import {Router} from '@angular/router';
 export class Bpm000Component implements OnInit {
 
   clientSearchForm: FormGroup;
-  clients: { name: string; lastName: string; clientKey: number}[] = [];
+  clients: Client[] = [];
   isSearchActive = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private postsService: PostsService) { }
 
   ngOnInit(): void {
     this.clientSearchForm = new FormGroup({
-      name: new FormControl(undefined),
-      lastName: new FormControl(undefined),
-      clientKey: new FormControl(undefined)
+      name: new FormControl(''),
+      lastName: new FormControl(''),
+      clientKey: new FormControl('')
     });
 
 
@@ -32,13 +36,11 @@ export class Bpm000Component implements OnInit {
     const name = this.get('name').value;
     const lastName = this.get('lastName').value;
     const clientKey = this.get('clientKey').value;
-
-    this.clients.push({name, lastName, clientKey});
-    this.clients.push({name, lastName, clientKey});
-    this.clients.push({name, lastName, clientKey});
-
-    console.log(name + lastName + clientKey);
-
+    this.postsService.getClietsPost(name, lastName, clientKey).subscribe( (data) => {
+      this.clients = data;
+    }, error => {
+      console.log(error);
+    });
   }
 
   get(controlName){
