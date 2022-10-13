@@ -7,11 +7,24 @@ import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
 import {AccountsComponent} from './modules/krn/accounts/accounts.component';
 import {KrnOperationsComponent} from './modules/krn/krn-operations/krn-operations.component';
 import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
+import {AuthGuard} from './auth-guard.guard';
+import {ClientGuard} from './client-guard.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    component: ShellComponent,
+    canActivate: [AuthGuard],
+    children:  [{
+      path: '',
+      component: Bpm000Component
+    }
+  ]
+  },
+  {
     path: 'bpm',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children:  [{
         path: '',
         component: Bpm000Component
@@ -29,6 +42,7 @@ const routes: Routes = [
   {
     path: 'krnicp',
     component: ShellComponent,
+    canActivate: [AuthGuard, ClientGuard],
     children:  [
       {
         path: 'accounts',

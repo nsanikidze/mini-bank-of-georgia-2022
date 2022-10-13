@@ -10,10 +10,13 @@ import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
 import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
 import {AccountsComponent} from './modules/krn/accounts/accounts.component';
 import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
+import {AuthGuard} from './auth-guard.guard';
+import {ClientGuard} from './client-guard.guard';
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent,   Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent],
   imports: [ShellRoutingModule, SharedModule],
+  providers: [AuthGuard, ClientGuard]
 })
 export class ShellModule {}
