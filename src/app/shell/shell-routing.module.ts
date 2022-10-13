@@ -5,10 +5,10 @@ import {Bpm000Component} from './modules/bpm/bpm000/bpm000.component';
 import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
 import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
 import {AccountsComponent} from './modules/krn/accounts/accounts.component';
-import {KrnOperationsComponent} from './modules/krn/krn-operations/krn-operations.component';
 import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
 import {AuthGuard} from './auth-guard.guard';
 import {ClientGuard} from './client-guard.guard';
+import {OperationsComponent} from './modules/operations/operations.component';
 
 const routes: Routes = [
   {
@@ -49,12 +49,12 @@ const routes: Routes = [
         component: AccountsComponent
       },
       {
-        path: 'addAccount',
+        path: 'createAccount',
         component: CreateAccountComponent
       },
       {
         path: 'operations',
-        component: KrnOperationsComponent
+        component: OperationsComponent
       }
     ]
   }];

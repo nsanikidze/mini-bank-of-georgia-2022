@@ -6,8 +6,8 @@
 }
 
 .nine.wide.field{
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
 }
 
 .ui.form>.field{
@@ -19,4 +19,8 @@
 }
 .ui.segment{
   border: none;
+}
+
+.button{
+  margin-top: 40px;
 }

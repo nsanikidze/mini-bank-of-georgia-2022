@@ -12,10 +12,11 @@ import {AccountsComponent} from './modules/krn/accounts/accounts.component';
 import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
 import {AuthGuard} from './auth-guard.guard';
 import {ClientGuard} from './client-guard.guard';
+import {OperationsComponent} from './modules/operations/operations.component';
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent,   Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent,   Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent],
   imports: [ShellRoutingModule, SharedModule],
   providers: [AuthGuard, ClientGuard]
 })

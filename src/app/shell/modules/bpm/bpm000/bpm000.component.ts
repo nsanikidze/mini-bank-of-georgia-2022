@@ -26,9 +26,6 @@ export class Bpm000Component implements OnInit {
       lastName: new FormControl(''),
       clientKey: new FormControl('')
     });
-
-
-
   }
 
   searchClient(){
@@ -36,7 +33,7 @@ export class Bpm000Component implements OnInit {
     const name = this.get('name').value;
     const lastName = this.get('lastName').value;
     const clientKey = this.get('clientKey').value;
-    this.postsService.getClietsPost(name, lastName, clientKey).subscribe( (data) => {
+    this.postsService.getClientsPost(name, lastName, clientKey).subscribe( (data) => {
       this.clients = data;
     }, error => {
       console.log(error);

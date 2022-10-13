@@ -15,7 +15,7 @@ export class ClientGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (JSON.parse(localStorage.getItem('clientData'))) {
+    if (localStorage.getItem('clientData')) {
       return true;
     } else {
       this.router.navigate(['/bpm']);
