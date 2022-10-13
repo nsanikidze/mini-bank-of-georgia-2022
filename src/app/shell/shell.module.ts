@@ -8,10 +8,12 @@ import { SharedModule } from '../shared/shared.module';
 import {Bpm000Component} from './modules/bpm/bpm000/bpm000.component';
 import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
 import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
+import {AccountsComponent} from './modules/krn/accounts/accounts.component';
+import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, Bpm000Component, Bpm001Component, CreateAccountComponent],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent],
   imports: [ShellRoutingModule, SharedModule],
 })
 export class ShellModule {}

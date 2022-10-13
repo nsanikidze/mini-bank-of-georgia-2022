@@ -17,8 +17,9 @@
 .client-img{
   width: 120px;
   height: 120px;
-  background-color: red;
   margin: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .client-info{
@@ -75,5 +76,8 @@
   bottom: 0;
 }
 
-
-
+.page-link{
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}

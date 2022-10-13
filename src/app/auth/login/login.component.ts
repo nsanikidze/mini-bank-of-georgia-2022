@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(userName, password).subscribe(
       resData => {
         console.log(resData);
-        this.router.navigate(['/']);
+        this.router.navigate(['/bpm']);
       },
       error => {
         this.authComponent.error = error;

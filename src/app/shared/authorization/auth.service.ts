@@ -51,6 +51,7 @@ export class AuthService {
     this.user.next(undefined);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
+    localStorage.removeItem('clientData');
     if (this.timer) {
       clearTimeout(this.timer);
     }

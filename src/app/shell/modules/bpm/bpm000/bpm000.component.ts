@@ -48,10 +48,12 @@ export class Bpm000Component implements OnInit {
   }
 
   addClient(){
-    this.router.navigate(['/bpm001']);
+    this.router.navigate(['/bpm/bpm001']);
   }
 
-  moveClient(value){
-    console.log(1);
+  moveClient(client: Client){
+    //this.router.navigate(['/krnicp'], {queryParams: client});
+    this.router.navigate(['/krnicp']);
+    localStorage.setItem('clientData', JSON.stringify(client));
   }
 }

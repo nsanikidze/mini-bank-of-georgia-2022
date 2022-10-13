@@ -10,20 +10,26 @@ import {CreateAccountComponent} from './modules/krn/accounts/create-account/crea
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'bpm',
     component: ShellComponent,
     children:  [{
+        path: '',
+        component: Bpm000Component
+      },
+      {
         path: 'bpm000',
         component: Bpm000Component
       },
       {
         path: 'bpm001',
         component: Bpm001Component
-      },
-      {
-        path: 'krnicp',
-        component: KrnicpComponent
-      },
+      }
+      ]
+  },
+  {
+    path: 'krnicp',
+    component: ShellComponent,
+    children:  [
       {
         path: 'accounts',
         component: AccountsComponent
@@ -36,7 +42,7 @@ const routes: Routes = [
         path: 'operations',
         component: KrnOperationsComponent
       }
-      ]
+    ]
   }];
 
 @NgModule({

@@ -46,7 +46,7 @@ export class Bpm001Component implements OnInit {
 
     this.postsService.addClientPost(this.client).subscribe();
 
-    this.router.navigate(['/bpm000']);
+    this.router.navigate(['/bpm/bpm000']);
 
   }
 

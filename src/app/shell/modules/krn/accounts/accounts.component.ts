@@ -13,8 +13,8 @@ export class AccountsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  moveAddAcount(){
-    this.router.navigate(['/addAccount'])
+  moveAddAccount(){
+    this.router.navigate(['/krn/addAccount']);
   }
 
 }

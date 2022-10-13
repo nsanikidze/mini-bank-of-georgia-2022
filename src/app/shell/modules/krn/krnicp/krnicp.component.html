@@ -1,10 +1,11 @@
 <div class="ui segments">
   <div class="ui segment client">
     <div class="client-info-left-item">
-      <div class="client-img"></div>
+      <div class="client-img" [ngStyle]="{'background-image' : 'url(' + client.image + ')'}">
+      </div>
       <div class="client-info">
-        <span class="client-name">Test 4 Tester</span>
-        <span>უნიკალური კოდი: 18</span>
+        <span class="client-name">{{client.firstName}} {{client.lastName}}</span>
+        <span>უნიკალური კოდი: {{client.clientKey}}</span>
       </div>
     </div>
     <div class="client-info-rigth-item">
@@ -14,18 +15,19 @@
           <span>plus:</span>
         </div>
         <div class="client-products-items-value">
-          <span>10000 GEL</span>
-          <span>5000</span>
+          <span>{{client.sumAmount}} GEL</span>
+          <span>{{client.plusPoints}}</span>
         </div>
       </div>
       <div class="logout-btn-item">
-        <button class="ui orange button logout-btn">გასვლა</button>
+        <button class="ui orange button logout-btn" (click)="clientLogout()">გასვლა</button>
       </div>
     </div>
   </div>
+  <div class="ui horizontal segments">
+    <a href="/krnicp" routerLink="/krnicp" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="ui segment page-link">  მთავარი  </a>
+    <a href="/krnicp/accounts" routerLink="/krnicp/accounts" routerLinkActive="active" class="ui segment page-link">ანგარიშები</a>
+    <a href="/krnicp/operations" routerLink="/krnicp/operations" routerLinkActive="active" class="ui segment page-link">ოპერაციები</a>
+  </div>
 </div>
-<div class="ui horizontal segment navigation">
-  <a routerLink="/krnicp" routerLinkActive="active" class="ui segment page-link">  მთავარი  </a>
-  <a href="/accounts" routerLink="/accounts" routerLinkActive="active" class="ui segment page-link">ანგარიშები</a>
-  <a href="/operations" routerLink="/operations" routerLinkActive="active" class="ui segment page-link">ოპერაციები</a>
-</div>
+
