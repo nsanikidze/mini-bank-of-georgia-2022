@@ -18,7 +18,7 @@ import {Pmd311Component} from './modules/pmd/pmd311/pmd311.component';
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent,   Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent, ClientHeaderComponent, Pmd311Component],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, Pmd311Component,  Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent, ClientHeaderComponent],
   imports: [ShellRoutingModule, SharedModule],
   providers: [AuthGuard, ClientGuard]
 })

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Client} from '../../client.model';
 import {PostsService} from '../../posts.service';
 import {KrnicpComponent} from '../krnicp/krnicp.component';
+import {KRNAccount} from './account.model';
 
 @Component({
   selector: 'bg-accounts',
@@ -11,7 +12,7 @@ import {KrnicpComponent} from '../krnicp/krnicp.component';
 })
 export class AccountsComponent implements OnInit {
 
-  accounts: Account[] = [];
+  accounts: KRNAccount[] = [];
 
   constructor(private router: Router,
               private postsService: PostsService) { }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {map, take} from 'rxjs/operators';
+import {catchError, map, take} from 'rxjs/operators';
 import {Client} from './client.model';
 import {LoaderService} from '../../shared/loader/loader.service';
-import {Account} from './krn/accounts/account.model';
+import { KRNAccount} from './krn/accounts/account.model';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class PostsService {
   getAccountsPost(clientKey) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('clientKey', clientKey);
-    return this.http.get<Account[]>('accounts', {params : httpParams, responseType: 'json'})
+    return this.http.get<KRNAccount[]>('accounts', {params : httpParams, responseType: 'json'})
       .pipe(
         this.loaderService.useLoader,
         map((data) => {
@@ -63,5 +64,11 @@ export class PostsService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('accountKey', accountKey);
     return this.http.delete('accounts', {params : httpParams}).pipe(this.loaderService.useLoader);
+  }
+
+  transferPost(transferModel) {
+    return this.http.post('transfer', transferModel)
+      .pipe(this.loaderService.useLoader,
+            catchError((err) => throwError(err.error)));
   }
 }

@@ -63,12 +63,10 @@ const routes: Routes = [
     path: 'pmd',
     component: ShellComponent,
     canActivate: [AuthGuard, ClientGuard],
-    children:  [
-      {
-        path: 'pmd311',
-        component: Pmd311Component
-      }
-    ]
+    children:  [{
+      path: 'pmd311',
+      component: Pmd311Component
+  }  ]
   }];
 
 @NgModule({

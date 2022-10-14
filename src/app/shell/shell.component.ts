@@ -12,10 +12,10 @@ import {User} from '../shared/authorization/user.model';
 })
 export class ShellComponent implements OnInit, OnDestroy {
 
+  error;
   userData: User;
   isUserLoggedIn: boolean;
   userSubscription: Subscription;
-  //hasClientData: boolean;
 
   get curDate() {
     const d = new Date();
@@ -26,9 +26,6 @@ export class ShellComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit(): void {
-
-    //this.hasClientData = JSON.parse(localStorage.getItem('clientData'));
-
     this.auth.autoLogin();
     this.userSubscription = this.auth.user.subscribe( (user) => {
       this.userData = user;

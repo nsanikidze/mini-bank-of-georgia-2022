@@ -3,30 +3,62 @@
     <h1>თანხის გადარიცხვა</h1>
   </div>
   <div class="ui segment">
-    <form  class="ui form" >
+    <form class="ui form" [formGroup]="pmd311Form" (ngSubmit)="transfer()" >
       <div class="ui three column grid">
         <div class="field">
           <div class="nine wide field">
             <label>გამგზავნი ანგარიში</label>
-            <input type="text" >
+            <select formControlName="senderAccountKey">
+              <option [ngValue]="defaultValue">
+                {{defaultText}}
+              </option>
+              <option *ngFor="let senderAccount of senderAccounts" [ngValue]="senderAccount.accountKey">
+                {{senderAccount.accountKey}} – {{senderAccount.amount}}GEL ({{senderAccount.accountName}})
+              </option>
+            </select>
+          </div>
+          <div *ngIf="get('senderAccountKey').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('senderAccountKey')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
           </div>
         </div>
         <div class="field">
           <div class="nine wide field">
             <label>მიმღები ანგარიში</label>
-            <input type="text" >
+            <select formControlName="receiverAccountKey"  >
+              <option [ngValue]="defaultValue">
+                {{defaultText}}
+              </option>
+              <option *ngFor="let receiverAccount of receiverAccounts" [ngValue]="receiverAccount.accountKey">
+                {{ receiverAccount.accountName}}
+                {{receiverAccount.accountKey}} – {{receiverAccount.amount}}GEL ({{receiverAccount.clientFirstName}} {{receiverAccount.clientLastName}})
+              </option>
+            </select>
+          </div>
+          <div *ngIf="get('receiverAccountKey').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('receiverAccountKey')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
           </div>
         </div>
         <div class="field">
           <div class="nine wide field">
             <label>თანხა</label>
-            <input type="number" >
+            <input type="number" formControlName="amount" >
+          </div>
+          <div *ngIf="get('amount').touched" class="error">
+            <ng-container *ngFor="let errorMessage of getErrors('amount')">
+              <span class="ui red text">{{errorMessage}}</span>
+            </ng-container>
           </div>
         </div>
       </div>
-      <button type="submit" class="ui blue icon button">
+      <button type="submit" class="ui green icon button">
         <i class="check icon"></i>
       </button>
+
     </form>
   </div>
 </div>
+<bg-alert *ngIf="error" [error]="error" (alertCloseClick)="error = undefined" ></bg-alert>

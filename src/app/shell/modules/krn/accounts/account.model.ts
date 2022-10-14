@@ -1,4 +1,4 @@
-export interface Account {
+export interface KRNAccount {
   accountKey: number;
   accountName: string;
   clientFirstName: string;
