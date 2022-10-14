@@ -9,6 +9,7 @@ import {CreateAccountComponent} from './modules/krn/accounts/create-account/crea
 import {AuthGuard} from './auth-guard.guard';
 import {ClientGuard} from './client-guard.guard';
 import {OperationsComponent} from './modules/operations/operations.component';
+import {Pmd311Component} from './modules/pmd/pmd311/pmd311.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,17 @@ const routes: Routes = [
       {
         path: 'operations',
         component: OperationsComponent
+      }
+    ]
+  },
+  {
+    path: 'pmd',
+    component: ShellComponent,
+    canActivate: [AuthGuard, ClientGuard],
+    children:  [
+      {
+        path: 'pmd311',
+        component: Pmd311Component
       }
     ]
   }];

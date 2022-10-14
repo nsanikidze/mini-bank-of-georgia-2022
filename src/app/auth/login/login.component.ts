@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
 
   OnSubmitForm(){
-    console.log(this.loginForm);
 
     if (this.loginForm.invalid){
       return;
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(userName, password).subscribe(
       resData => {
-        console.log(resData);
         this.router.navigate(['/bpm']);
       },
       error => {

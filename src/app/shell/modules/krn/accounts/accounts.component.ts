@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Client} from '../../client.model';
 import {PostsService} from '../../posts.service';
+import {KrnicpComponent} from '../krnicp/krnicp.component';
 
 @Component({
   selector: 'bg-accounts',
@@ -16,13 +17,7 @@ export class AccountsComponent implements OnInit {
               private postsService: PostsService) { }
 
   ngOnInit(): void {
-    const clientData = JSON.parse(localStorage.getItem('clientData'));
-    this.loadAccount(clientData.clientKey);
-    //აქ clientKey-ს გადმოცემა queryParams-ითაც ვიფიქრე , მაგრამ უნდა დამეჩეკა, გადმოცემული კლიენტი ემთხვევა თუ არა localStorage-ში არსებულ კლიენტს
-
-  }
-
-  loadAccount(clientKey){
+    const clientKey = JSON.parse(localStorage.getItem('clientKey'));
     this.postsService.getAccountsPost(clientKey).subscribe( (data) => {
       this.accounts = data;
     }, error => {
@@ -30,8 +25,8 @@ export class AccountsComponent implements OnInit {
     });
   }
 
+
   addAccount(){
-    console.log(1);
     this.router.navigate(['/krnicp/createAccount']);
   }
 

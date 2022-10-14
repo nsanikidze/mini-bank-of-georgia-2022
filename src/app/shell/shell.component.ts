@@ -15,7 +15,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   userData: User;
   isUserLoggedIn: boolean;
   userSubscription: Subscription;
-  hasClientData: boolean;
+  //hasClientData: boolean;
 
   get curDate() {
     const d = new Date();
@@ -27,7 +27,7 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.hasClientData = JSON.parse(localStorage.getItem('clientData'));
+    //this.hasClientData = JSON.parse(localStorage.getItem('clientData'));
 
     this.auth.autoLogin();
     this.userSubscription = this.auth.user.subscribe( (user) => {

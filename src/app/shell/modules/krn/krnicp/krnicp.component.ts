@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Client} from '../../client.model';
+import {PostsService} from '../../posts.service';
 
 @Component({
   selector: 'bg-krnicp',
@@ -12,33 +13,33 @@ export class KrnicpComponent implements OnInit {
   client: Client;
 
   constructor(private router: Router,
-              private route: ActivatedRoute) { }
+              private postsService: PostsService) { }
+
 
   ngOnInit(): void {
-    const clientData = JSON.parse(localStorage.getItem('clientData'));
-    this.client = {
-      firstName: clientData.firstName,
-      lastName: clientData.lastName,
-      image: clientData.image,
-      clientKey: clientData.clientKey,
-      sumAmount: clientData.sumAmount,
-      plusPoints: clientData.plusPoints
-    };
-    /*this.route.queryParams.subscribe( (queryParams) => {
-      console.log(queryParams);
-      this.client = {
-        firstName: queryParams.firstName,
-        lastName: queryParams.lastName,
-        image: queryParams.image,
-        clientKey: queryParams.clientKey,
-        sumAmount: queryParams.sumAmount,
-        plusPoints: queryParams.plusPoints
-      };
-    });*/
+    const clientKey = JSON.parse(localStorage.getItem('clientKey'));
+    this.postsService.getClientPost(clientKey).subscribe((data) => {
+      this.client = data[0];
+    }, error => {
+      console.log(error);
+    });
   }
 
   clientLogout(){
-    localStorage.removeItem('clientData');
+    localStorage.removeItem('clientKey');
     this.router.navigate(['/bpm']);
   }
+/*
+  loadClient() {
+      console.log(5);
+      this.client = undefined;
+      const clientKey = JSON.parse(localStorage.getItem('clientKey'));
+      this.postsService.getClientPost(clientKey).subscribe( (data) => {
+        this.client = data[0];
+      }, error => {
+        console.log(error);
+      });
+  }
+
+ */
 }

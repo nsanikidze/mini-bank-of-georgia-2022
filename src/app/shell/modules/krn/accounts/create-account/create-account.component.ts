@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../../shared/validators';
 import {AccountsComponent} from '../accounts.component';
+import {KrnicpComponent} from '../../krnicp/krnicp.component';
 
 @Component({
   selector: 'bg-create-account',
@@ -31,26 +32,22 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
-  OnSubmitForm(clientKey){
-    console.log(this.accountCreatorForm.value);
+  OnSubmitForm(){
     if (this.accountCreatorForm.invalid){
       return;
     }
 
-    const clientData = JSON.parse(localStorage.getItem('clientData'));
+    const inputClientKey = JSON.parse(localStorage.getItem('clientKey'));
     this.account = {
-      clientKey: clientData.clientKey,
+      clientKey: inputClientKey,
       accountName: this.get('accountName').value,
       amount: this.get('amount').value
     };
 
-
+    console.log(1);
     this.postsService.addAccountPost(this.account).subscribe();
-
-    
-    const accountsComponent = new AccountsComponent(this.router, this.postsService);
+    console.log(2);
     this.router.navigate(['/krnicp/accounts']);
-    accountsComponent.loadAccount(clientKey);
 
   }
 

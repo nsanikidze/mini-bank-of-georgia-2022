@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
 
 
   OnSubmitForm(){
-    console.log(this.signUpForm);
     if (this.get('password').value !== this.get('confirmPassword').value){
       this.passwordsMatched = false;
       return;
@@ -57,7 +56,6 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(name, userName, password).subscribe(
       resData => {
-        console.log(resData);
         this.router.navigate(['/bpm']);
       },
       error => {

@@ -51,7 +51,7 @@ export class AuthService {
     this.user.next(undefined);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
-    localStorage.removeItem('clientData');
+    localStorage.removeItem('clientKey');
     if (this.timer) {
       clearTimeout(this.timer);
     }
@@ -72,7 +72,7 @@ export class AuthService {
 
   autoLogin() {
     const responseData = JSON.parse(localStorage.getItem('userData'));
-    console.log('resData' + responseData);
+
 
     if (!responseData){
       return;
@@ -88,7 +88,6 @@ export class AuthService {
     if (!responseData._token){
       return;
     }
-    console.log(responseData.username);
     this.user.next(user);
   }
 
