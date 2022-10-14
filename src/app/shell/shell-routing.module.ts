@@ -20,7 +20,6 @@ const routes: Routes = [
     component: ShellComponent,
     canActivate: [AuthGuard],
     children: [
-
       {
         path: 'bpm',
         component: BpmComponent,
@@ -66,22 +65,22 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'pmd',
+        component: PmdComponent,
+        canActivate: [ClientGuard],
+        children: [
           {
-            path: 'pmd',
-            component: PmdComponent,
-            canActivate: [ClientGuard],
-            children: [
-              {
-                path: '',
-                component: Pmd311Component
-              },
-              {
-                path: 'pmd311',
-                component: Pmd311Component
-              }
-            ]
+            path: '',
+            component: Pmd311Component
+          },
+          {
+            path: 'pmd311',
+            component: Pmd311Component
           }
         ]
+      }
+    ]
 
   }
   ];
