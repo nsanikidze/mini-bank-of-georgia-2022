@@ -29,6 +29,7 @@ export class Bpm000Component implements OnInit {
   }
 
   searchClient(){
+    console.log(1);
     this.isSearchActive = true;
     const name = this.get('name').value;
     const lastName = this.get('lastName').value;
@@ -50,6 +51,6 @@ export class Bpm000Component implements OnInit {
 
   moveClient(client: Client){
     localStorage.setItem('clientKey', JSON.stringify(client.clientKey));
-    this.router.navigate(['/krnicp']);
+    this.router.navigate(['/krn']);
   }
 }

@@ -5,21 +5,23 @@ import { ShellRoutingModule } from './shell-routing.module';
 import {ShellSidebarComponent} from './shell-sidebar/shell-sidebar.component';
 import {ShellHeaderComponent} from './shell-header/shell-header.component';
 import { SharedModule } from '../shared/shared.module';
-import {Bpm000Component} from './modules/bpm/bpm000/bpm000.component';
-import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
-import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
-import {AccountsComponent} from './modules/krn/accounts/accounts.component';
-import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
-import {AuthGuard} from './auth-guard.guard';
+import {AuthGuard} from '../shared/auth-guard.guard';
 import {ClientGuard} from './client-guard.guard';
-import {OperationsComponent} from './modules/operations/operations.component';
-import {ClientHeaderComponent} from './modules/client-header/client-header.component';
-import {Pmd311Component} from './modules/pmd/pmd311/pmd311.component';
+import {PmdModule} from './modules/pmd/pmd.module';
+import {ClientHeaderComponent} from './client-header/client-header.component';
+import {BpmComponent} from './modules/bpm/bpm.component';
+import {KrnComponent} from './modules/krn/krn.component';
+import {PmdComponent} from './modules/pmd/pmd.component';
+import {BpmModule} from './modules/bpm/bpm.module';
+import {KrnModule} from './modules/krn/krn.module';
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, Pmd311Component,  Bpm000Component, Bpm001Component, KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent, ClientHeaderComponent],
-  imports: [ShellRoutingModule, SharedModule],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, ClientHeaderComponent, BpmComponent, KrnComponent, PmdComponent],
+  imports: [ShellRoutingModule, SharedModule,  BpmModule, BpmModule, KrnModule],
+  exports: [
+    ShellComponent
+  ],
   providers: [AuthGuard, ClientGuard]
 })
 export class ShellModule {}

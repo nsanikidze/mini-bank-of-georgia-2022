@@ -3,7 +3,7 @@ import { FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../shared/validators';
 import {AuthService} from '../../shared/authorization/auth.service';
 import {AuthComponent} from '../auth.component';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'bg-login',
@@ -49,6 +49,8 @@ export class LoginComponent implements OnInit {
       }
     );
     this.loginForm.reset();
+
+
   }
 
   get(controlName){

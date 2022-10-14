@@ -52,21 +52,17 @@ export class Pmd311Component implements OnInit {
   }
 
   transfer(){
-    console.log(this.get('senderAccountKey').value);
     this.transferModel = {
       senderAccountKey: this.get('senderAccountKey').value,
       receiverAccountKey: this.get('receiverAccountKey').value,
       amount: this.get('amount').value
     };
 
-    console.log(this.transferModel);
     this.postsService.transferPost(this.transferModel).subscribe( response => {
-      console.log(response);
-      this.router.navigate(['/krnicp/accounts']);
+      this.router.navigate(['/krn/accounts']);
     }, error => {
       this.error = error;
     });
-
   }
 
 }

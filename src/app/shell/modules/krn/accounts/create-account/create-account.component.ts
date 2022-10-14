@@ -47,7 +47,7 @@ export class CreateAccountComponent implements OnInit {
     console.log(1);
     this.postsService.addAccountPost(this.account).subscribe();
     console.log(2);
-    this.router.navigate(['/krnicp/accounts']);
+    this.router.navigate(['/krn/accounts']);
 
   }
 

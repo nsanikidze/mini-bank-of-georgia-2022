@@ -28,7 +28,7 @@ export class AccountsComponent implements OnInit {
 
 
   addAccount(){
-    this.router.navigate(['/krnicp/createAccount']);
+    this.router.navigate(['/krn/createAccount']);
   }
 
   deleteAccount(accountKey){

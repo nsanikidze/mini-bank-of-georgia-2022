@@ -44,9 +44,12 @@ export class Bpm001Component implements OnInit {
       plusPoints: this.get('plusPoints').value
     };
 
-    this.postsService.addClientPost(this.client).subscribe();
+    this.postsService.addClientPost(this.client).subscribe( () => {
+        this.router.navigate(['/bpm/bpm000']);
+      }
+    );
 
-    this.router.navigate(['/bpm/bpm000']);
+
 
   }
 
