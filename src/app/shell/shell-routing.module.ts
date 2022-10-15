@@ -2,20 +2,39 @@ import {ShellComponent} from './shell.component';
 import {AuthGuard} from '../shared/auth-guard.guard';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {BpmComponent} from './modules/bpm/bpm.component';
-import {KrnComponent} from './modules/krn/krn.component';
 import {ClientGuard} from './client-guard.guard';
-import {PmdComponent} from './modules/pmd/pmd.component';
-import {Bpm000Component} from './modules/bpm/bpm000/bpm000.component';
-import {Bpm001Component} from './modules/bpm/bpm001/bpm001.component';
-import {KrnicpComponent} from './modules/krn/krnicp/krnicp.component';
-import {AccountsComponent} from './modules/krn/accounts/accounts.component';
-import {OperationsComponent} from './modules/krn/operations/operations.component';
-import {Pmd311Component} from './modules/pmd/pmd311/pmd311.component';
-import {CreateAccountComponent} from './modules/krn/accounts/create-account/create-account.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: ShellComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'bpm',
+        loadChildren: () => import('./modules/bpm/bpm.module').then((m) => m.BpmModule),
+        data: { preload: true },
+      },
+      {
+        path: 'krn',
+        loadChildren: () => import('./modules/krn/krn.module').then((m) => m.KrnModule),
+        data: { preload: true },
+        canActivate: [ClientGuard]
+      },
+      {
+        path: 'pmd',
+        loadChildren: () => import('./modules/pmd/pmd.module').then((m) => m.PmdModule),
+        data: { preload: true },
+        canActivate: [ClientGuard]
+      },
+      {
+        path: '',
+        redirectTo: 'bpm',
+        pathMatch: 'full',
+      },
+    ],
+  },
+ /* {
     path: '',
     component: ShellComponent,
     canActivate: [AuthGuard],
@@ -82,7 +101,7 @@ const routes: Routes = [
       }
     ]
 
-  }
+  }*/
   ];
 
 @NgModule({

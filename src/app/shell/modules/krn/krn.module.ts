@@ -4,14 +4,13 @@ import {CreateAccountComponent} from './accounts/create-account/create-account.c
 import {AccountsComponent} from './accounts/accounts.component';
 import {OperationsComponent} from './operations/operations.component';
 import {SharedModule} from '../../../shared/shared.module';
-import {AuthGuard} from '../../../shared/auth-guard.guard';
-import {ClientGuard} from '../../client-guard.guard';
+import {KrnRoutingModule} from './krn-routing.module';
+import {KrnComponent} from './krn.component';
 
 
 
 @NgModule({
-  declarations: [KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent],
-  imports: [SharedModule],
-  providers: [AuthGuard, ClientGuard]
+  declarations: [KrnComponent, KrnicpComponent, CreateAccountComponent, AccountsComponent, OperationsComponent],
+  imports: [SharedModule, KrnRoutingModule]
 })
 export class KrnModule {}

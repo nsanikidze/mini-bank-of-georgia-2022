@@ -18,8 +18,9 @@ export class AccountsComponent implements OnInit {
               private postsService: PostsService) { }
 
   ngOnInit(): void {
-    const clientKey = JSON.parse(localStorage.getItem('clientKey'));
-    this.postsService.getAccountsPost(clientKey).subscribe( (data) => {
+    console.log('accountOnInit');
+    const client = JSON.parse(localStorage.getItem('clientData'));
+    this.postsService.getAccountsPost(client.clientKey).subscribe( (data) => {
       this.accounts = data;
     }, error => {
       console.log(error);

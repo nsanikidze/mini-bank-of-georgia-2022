@@ -5,6 +5,9 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../../shared/validators';
 import {AccountsComponent} from '../accounts.component';
 import {KrnicpComponent} from '../../krnicp/krnicp.component';
+import {take} from 'rxjs/operators';
+import {Client} from '../../../client.model';
+import {ModulesService} from '../../../modules.service';
 
 @Component({
   selector: 'bg-create-account',
@@ -19,9 +22,11 @@ export class CreateAccountComponent implements OnInit {
     accountName: string,
     amount: number
   };
+  client: Client;
 
   constructor(private postsService: PostsService,
-              private router: Router) { }
+              private router: Router,
+              private modulesService: ModulesService) { }
 
   ngOnInit(): void {
     this.accountCreatorForm = new FormGroup({
@@ -36,18 +41,19 @@ export class CreateAccountComponent implements OnInit {
     if (this.accountCreatorForm.invalid){
       return;
     }
-
-    const inputClientKey = JSON.parse(localStorage.getItem('clientKey'));
+    const inputClient = JSON.parse(localStorage.getItem('clientData'));
     this.account = {
-      clientKey: inputClientKey,
+      clientKey: inputClient.clientKey,
       accountName: this.get('accountName').value,
       amount: this.get('amount').value
     };
+    this.postsService.addAccountPost(this.account).subscribe( () => {
+      this.modulesService.reloadClientData();
+      this.router.navigate(['/krn/accounts']);
+      }
+    );
 
-    console.log(1);
-    this.postsService.addAccountPost(this.account).subscribe();
-    console.log(2);
-    this.router.navigate(['/krn/accounts']);
+
 
   }
 
@@ -61,7 +67,5 @@ export class CreateAccountComponent implements OnInit {
     }
   }
 
-  moveAccount(){
-    this.router.navigate(['/accounts']);
-  }
+
 }

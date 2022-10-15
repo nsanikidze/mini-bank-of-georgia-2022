@@ -17,6 +17,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   isUserLoggedIn: boolean;
   userSubscription: Subscription;
 
+
   get curDate() {
     const d = new Date();
     return `${('0' + d.getDate()).slice(-2)}/${('0' + (d.getMonth() + 1)).slice(-2)}/${d.getFullYear()}`;

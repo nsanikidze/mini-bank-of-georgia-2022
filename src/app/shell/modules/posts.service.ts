@@ -9,6 +9,7 @@ import {throwError} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PostsService {
 
   constructor(private http: HttpClient,
@@ -22,12 +23,13 @@ export class PostsService {
     return this.http.get<Client[]>('clients', {params : httpParams, responseType: 'json'})
       .pipe(
         this.loaderService.useLoader,
+        catchError((err) => throwError(err.error)),
         map((data) => {
           return data;
         }));
   }
 
-  getClientPost<Client>(clientKey) {
+  getClientPost(clientKey) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('firstName', '');
     httpParams = httpParams.append('lastName', '');
@@ -49,6 +51,15 @@ export class PostsService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('clientKey', clientKey);
     return this.http.get<KRNAccount[]>('accounts', {params : httpParams, responseType: 'json'})
+      .pipe(
+        this.loaderService.useLoader,
+        map((data) => {
+          return data;
+        }));
+  }
+
+  getAllAccountsPost() {
+    return this.http.get<KRNAccount[]>('accounts', { responseType: 'json'})
       .pipe(
         this.loaderService.useLoader,
         map((data) => {

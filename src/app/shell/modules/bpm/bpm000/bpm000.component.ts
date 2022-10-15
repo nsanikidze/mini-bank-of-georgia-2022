@@ -50,7 +50,7 @@ export class Bpm000Component implements OnInit {
   }
 
   moveClient(client: Client){
-    localStorage.setItem('clientKey', JSON.stringify(client.clientKey));
+    localStorage.setItem('clientData', JSON.stringify(client));
     this.router.navigate(['/krn']);
   }
 }

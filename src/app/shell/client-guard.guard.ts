@@ -15,10 +15,12 @@ export class ClientGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (localStorage.getItem('clientKey')) {
+    console.log(12);
+    console.log(localStorage.getItem('clientData'));
+    if (localStorage.getItem('clientData')) {
       return true;
     } else {
-      this.router.navigate(['/bpm']);
+      this.router.navigate(['/bpm/bpm000']);
     }
   }
 

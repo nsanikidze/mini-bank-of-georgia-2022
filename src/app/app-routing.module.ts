@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ShellComponent} from './shell/shell.component';
-import {AuthGuard} from './shared/auth-guard.guard';
-import {AuthComponent} from './auth/auth.component';
+import {AppPreloadingService} from './app-preloading.service';
 
 const routes: Routes = [];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { preloadingStrategy: AppPreloadingService }),
   ],
   exports: [RouterModule],
 })

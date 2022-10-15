@@ -14,7 +14,6 @@ export class OperationsComponent implements OnInit {
   }
 
   movePmd(){
-    console.log(1);
     this.router.navigate(['/pmd/pmd311']);
   }
 }

@@ -7,21 +7,14 @@ import {ShellHeaderComponent} from './shell-header/shell-header.component';
 import { SharedModule } from '../shared/shared.module';
 import {AuthGuard} from '../shared/auth-guard.guard';
 import {ClientGuard} from './client-guard.guard';
-import {PmdModule} from './modules/pmd/pmd.module';
 import {ClientHeaderComponent} from './client-header/client-header.component';
-import {BpmComponent} from './modules/bpm/bpm.component';
-import {KrnComponent} from './modules/krn/krn.component';
-import {PmdComponent} from './modules/pmd/pmd.component';
-import {BpmModule} from './modules/bpm/bpm.module';
-import {KrnModule} from './modules/krn/krn.module';
+import {CommonModule} from '@angular/common';
+
 
 
 @NgModule({
-  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, ClientHeaderComponent, BpmComponent, KrnComponent, PmdComponent],
-  imports: [ShellRoutingModule, SharedModule,  BpmModule, BpmModule, KrnModule],
-  exports: [
-    ShellComponent
-  ],
+  declarations: [ShellComponent, ShellSidebarComponent, ShellHeaderComponent, ClientHeaderComponent],
+  imports: [ShellRoutingModule, CommonModule],
   providers: [AuthGuard, ClientGuard]
 })
 export class ShellModule {}

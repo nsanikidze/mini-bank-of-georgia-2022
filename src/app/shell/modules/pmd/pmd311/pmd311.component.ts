@@ -5,6 +5,7 @@ import {KRNAccount} from '../../krn/accounts/account.model';
 import {PostsService} from '../../posts.service';
 import {TransferModel} from './transfer.model';
 import {Router} from '@angular/router';
+import {ModulesService} from '../../modules.service';
 
 @Component({
   selector: 'bg-pmd311',
@@ -22,12 +23,18 @@ export class Pmd311Component implements OnInit {
   defaultValue = undefined;
 
   constructor(private postsService: PostsService,
+              private modulesService: ModulesService,
               private router: Router) { }
 
   ngOnInit(): void {
-    const clientKey = JSON.parse(localStorage.getItem('clientKey'));
-    this.postsService.getAccountsPost(clientKey).subscribe( (data) => {
+    const client = JSON.parse(localStorage.getItem('clientData'));
+    this.postsService.getAccountsPost(client.clientKey).subscribe( (data) => {
       this.senderAccounts = data;
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+    this.postsService.getAllAccountsPost().subscribe( (data) => {
       this.receiverAccounts = data;
       console.log(data);
     }, error => {
@@ -59,10 +66,12 @@ export class Pmd311Component implements OnInit {
     };
 
     this.postsService.transferPost(this.transferModel).subscribe( response => {
+      this.modulesService.reloadClientData();
       this.router.navigate(['/krn/accounts']);
     }, error => {
       this.error = error;
     });
+
   }
 
 }
