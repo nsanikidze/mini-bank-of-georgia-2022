@@ -48,9 +48,6 @@ export class Bpm001Component implements OnInit {
         this.router.navigate(['/bpm/bpm000']);
       }
     );
-
-
-
   }
 
   get(controlName){
