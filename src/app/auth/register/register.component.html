@@ -42,8 +42,10 @@
         <span class="ui red text">{{errorMessage}}</span>
       </ng-container>
     </div>
-    <div *ngIf="!passwordsMatched" class="error">
-      <span class="ui red text">პაროლები არ ემთხვევა</span>
+    <div *ngIf="get('confirmPassword').touched && get('password').touched" class="error">
+      <ng-container *ngFor="let errorMessage of getFormErrors()">
+        <span class="ui red text">{{errorMessage}}</span>
+      </ng-container>
     </div>
   </div>
   <div>

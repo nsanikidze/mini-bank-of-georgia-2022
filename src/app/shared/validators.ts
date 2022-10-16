@@ -1,4 +1,4 @@
-import { FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class BgValidators extends Validators {
 
@@ -32,5 +32,22 @@ export class BgValidators extends Validators {
         ? { minValue: `მინიმალური მნიშვნელობა უნდა იყოს ${minNumber}` }
         : undefined;
   }
+
+  /*
+  static matchedPasswordsValidator(formGroup: FormGroup) {
+      if (formGroup.get('password').value !== formGroup.get('confirmPassword').value){
+        return { notMatchPassword: 'პაროლები არ ემთხვევა'};
+      } else {
+        return undefined;
+      }
+
+  }*/
+  
+
+  static controlValurMatchedValidator(control1, control2) {
+    return (formGroup) =>
+      formGroup.get(control1).value !== formGroup.get(control2).value ? { notMatchPassword: 'პაროლები არ ემთხვევა'} : undefined;
+  }
+
 
 }

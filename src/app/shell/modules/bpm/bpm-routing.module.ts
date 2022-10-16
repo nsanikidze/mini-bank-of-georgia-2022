@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: '',
     component: BpmComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: 'bpm000',

@@ -8,7 +8,7 @@
         <div class="field">
           <div class="nine wide field">
             <label>გამგზავნი ანგარიში</label>
-            <select formControlName="senderAccountKey">
+            <select formControlName="senderAccountKey"  (change) = "onSenderChanged()" >
               <option [ngValue]="defaultValue">
                 {{defaultText}}
               </option>
@@ -26,11 +26,11 @@
         <div class="field">
           <div class="nine wide field">
             <label>მიმღები ანგარიში</label>
-            <select formControlName="receiverAccountKey"  >
-              <option [ngValue]="defaultValue">
+            <select formControlName="receiverAccountKey"  (change) = "onChane($event)">
+              <option [ngValue]="defaultValue" >
                 {{defaultText}}
               </option>
-              <option *ngFor="let receiverAccount of receiverAccounts" [ngValue]="receiverAccount.accountKey">
+              <option *ngFor="let receiverAccount of filteredReceiverAccounts" [ngValue]="receiverAccount.accountKey">
                 {{ receiverAccount.accountName}}
                 {{receiverAccount.accountKey}} – {{receiverAccount.amount | bgNumberFormat }}GEL ({{receiverAccount.clientFirstName}} {{receiverAccount.clientLastName}})
               </option>

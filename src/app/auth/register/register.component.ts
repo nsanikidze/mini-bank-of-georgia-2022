@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   signUpForm: FormGroup;
-  passwordsMatched = true;
   error;
 
   constructor(private auth: AuthService,
@@ -35,17 +34,12 @@ export class RegisterComponent implements OnInit {
       confirmPassword: new FormControl(undefined, [BgValidators.required,
         BgValidators.minLength(2),
         BgValidators.maxLength(30)]),
-    });
+    }, BgValidators.controlValurMatchedValidator('password', 'confirmPassword')
+      );
   }
 
 
   OnSubmitForm(){
-    if (this.get('password').value !== this.get('confirmPassword').value){
-      this.passwordsMatched = false;
-      return;
-    }
-    this.passwordsMatched = true;
-
     if (this.signUpForm.invalid){
       return;
     }
@@ -72,6 +66,12 @@ export class RegisterComponent implements OnInit {
   getErrors(controlName){
     if (this.get(controlName).errors){
       return Object.values(this.get(controlName).errors);
+    }
+  }
+
+  getFormErrors(){
+    if (this.signUpForm.errors) {
+      return Object.values(this.signUpForm.errors);
     }
   }
 }

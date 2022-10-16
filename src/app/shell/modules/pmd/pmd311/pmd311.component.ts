@@ -6,6 +6,7 @@ import {PostsService} from '../../posts.service';
 import {TransferModel} from './transfer.model';
 import {Router} from '@angular/router';
 import {ModulesService} from '../../modules.service';
+import {Client} from '../../client.model';
 
 @Component({
   selector: 'bg-pmd311',
@@ -19,22 +20,26 @@ export class Pmd311Component implements OnInit {
   pmd311Form: FormGroup;
   senderAccounts: AccountModel[] = [];
   receiverAccounts: AccountModel[] = [];
+  filteredReceiverAccounts: AccountModel[] = [];
   defaultText = 'აირჩიე';
   defaultValue = undefined;
+  client: Client;
 
   constructor(private postsService: PostsService,
               private modulesService: ModulesService,
               private router: Router) { }
 
   ngOnInit(): void {
-    const client = JSON.parse(localStorage.getItem('clientData'));
-    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
+    this.client = JSON.parse(localStorage.getItem('clientData'));
+    this.postsService.getClientAccountsPost(this.client.clientKey).subscribe( (data) => {
       this.senderAccounts = data;
     }, error => {
       console.log(error);
     });
+
     this.postsService.getClientsAccountsPost().subscribe( (data) => {
       this.receiverAccounts = data;
+      this.filteredReceiverAccounts = data;
     }, error => {
       console.log(error);
     });
@@ -69,7 +74,21 @@ export class Pmd311Component implements OnInit {
     }, error => {
       this.error = error;
     });
-
   }
+
+  onSenderChanged() {
+    if (this.get('senderAccountKey').value ){
+      this.filteredReceiverAccounts = this.receiverAccounts.filter( (e) => e.accountKey !== this.get('senderAccountKey').value);
+    }
+    if (this.get('senderAccountKey').value  === this.get('receiverAccountKey').value){
+      console.log(this.get('receiverAccountKey').value);
+      this.pmd311Form.get('receiverAccountKey').setValue(this.defaultValue);
+    }
+  }
+
+  onChane(event){
+    console.log(event);
+  }
+
 
 }
