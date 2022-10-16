@@ -9,7 +9,6 @@ export class AppComponent implements  OnInit{
   name = 'Levan';
 
   ngOnInit(): void {
-    console.log('apap');
   }
 
 

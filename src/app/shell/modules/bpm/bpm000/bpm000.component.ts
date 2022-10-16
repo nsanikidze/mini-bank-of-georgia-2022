@@ -13,9 +13,9 @@ import {Client} from '../../client.model';
 })
 export class Bpm000Component implements OnInit {
 
-  clientSearchForm: FormGroup;
   clients: Client[] = [];
   isSearchActive = false;
+  clientSearchForm: FormGroup;
 
   constructor(private router: Router,
               private postsService: PostsService) { }
@@ -28,29 +28,32 @@ export class Bpm000Component implements OnInit {
     });
   }
 
-  searchClient(){
-    console.log(1);
+  onClientSearch(){
     this.isSearchActive = true;
+
     const name = this.get('name').value;
     const lastName = this.get('lastName').value;
     const clientKey = this.get('clientKey').value;
-    this.postsService.getClientsPost(name, lastName, clientKey).subscribe( (data) => {
+
+    this.postsService.fetchClientsPost(name, lastName, clientKey).subscribe( (data) => {
       this.clients = data;
     }, error => {
       console.log(error);
     });
   }
 
-  get(controlName){
-    return this.clientSearchForm.get(controlName);
-  }
 
-  addClient(){
+  onAddClient(){
     this.router.navigate(['/bpm/bpm001']);
   }
 
-  moveClient(client: Client){
+
+  onGetClient(client: Client){
     localStorage.setItem('clientData', JSON.stringify(client));
     this.router.navigate(['/krn']);
+  }
+
+  get(controlName){
+    return this.clientSearchForm.get(controlName);
   }
 }

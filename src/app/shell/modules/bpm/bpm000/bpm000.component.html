@@ -3,7 +3,7 @@
     <h1>კლიენტის ძებნა</h1>
   </div>
   <div class="ui segment">
-    <form class="ui bordered form segment" [formGroup]="clientSearchForm" (ngSubmit)="searchClient()">
+    <form class="ui bordered form segment" [formGroup]="clientSearchForm" (ngSubmit)="onClientSearch()">
       <div class="ui three column grid">
         <div class="field">
           <label>სახელი</label>
@@ -27,7 +27,7 @@
     <div  *ngIf="isSearchActive">
       <div class="table-header">
         <span>კლიენტები</span>
-        <button class="ui icon button" (click)="addClient()">
+        <button class="ui icon button" (click)="onAddClient()">
           <i class="plus icon"></i>
         </button>
       </div>
@@ -39,7 +39,7 @@
         <th>კლიენტის უნიკალური</th>
         </thead>
         <tbody *ngFor="let client of clients">
-          <tr class="client" (click)="moveClient(client)" >
+          <tr class="client" (click)="onGetClient(client)" >
             <td>{{client.firstName}}</td>
             <td>{{client.lastName}}</td>
             <td>{{client.clientKey}}</td>

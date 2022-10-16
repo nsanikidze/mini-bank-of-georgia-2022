@@ -5,7 +5,7 @@
   <div  class="ui segment">
     <div class="table-header">
       <span>ანგარიშები</span>
-      <button class="ui icon button" (click)="addAccount()" >
+      <button class="ui icon button" (click)="onAddAccount()" >
         <i class="plus icon"></i>
       </button>
     </div>
@@ -22,7 +22,9 @@
         <td>{{account.clientFirstName}} {{account.clientLastName}} </td>
         <td>{{account.accountName}}</td>
         <td>{{account.amount}}</td>
-        <td (click)="deleteAccount(account.accountKey)" ><i class="trash icon"></i></td>
+        <td (click)="onDeleteAccount(account.accountKey)" >
+          <i class="trash icon"></i>
+        </td>
       </tr>
       </tbody>
     </table>

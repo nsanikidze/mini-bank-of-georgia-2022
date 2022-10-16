@@ -8,6 +8,7 @@ import {KrnicpComponent} from '../../krnicp/krnicp.component';
 import {take} from 'rxjs/operators';
 import {Client} from '../../../client.model';
 import {ModulesService} from '../../../modules.service';
+import {InputAccountMoldel} from '../input-account.model';
 
 @Component({
   selector: 'bg-create-account',
@@ -17,12 +18,7 @@ import {ModulesService} from '../../../modules.service';
 export class CreateAccountComponent implements OnInit {
 
   accountCreatorForm: FormGroup;
-  account: {
-    clientKey: string,
-    accountName: string,
-    amount: number
-  };
-  client: Client;
+  account: InputAccountMoldel;
 
   constructor(private postsService: PostsService,
               private router: Router,
@@ -33,28 +29,26 @@ export class CreateAccountComponent implements OnInit {
       accountName: new FormControl(undefined, [BgValidators.required,
         BgValidators.minLength(2),
         BgValidators.maxLength(30)]),
-      amount: new FormControl(undefined, [BgValidators.min(0)])
+      amount: new FormControl(undefined, [BgValidators.required,
+        BgValidators.min(0)])
     });
   }
 
-  OnSubmitForm(){
+  OnAddAccount(){
     if (this.accountCreatorForm.invalid){
       return;
     }
-    const inputClient = JSON.parse(localStorage.getItem('clientData'));
+    const savedClientKey = JSON.parse(localStorage.getItem('clientData')).clientKey;
     this.account = {
-      clientKey: inputClient.clientKey,
+      clientKey: savedClientKey,
       accountName: this.get('accountName').value,
       amount: this.get('amount').value
     };
-    this.postsService.addAccountPost(this.account).subscribe( () => {
+    this.postsService.createAccountPost(this.account).subscribe( () => {
       this.modulesService.reloadClientData();
       this.router.navigate(['/krn/accounts']);
       }
     );
-
-
-
   }
 
   get(controlName){

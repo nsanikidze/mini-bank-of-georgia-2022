@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {Client} from '../../client.model';
-import {PostsService} from '../../posts.service';
-import {KrnicpComponent} from '../krnicp/krnicp.component';
-import {KRNAccount} from './account.model';
+import { Router } from '@angular/router';
+import { PostsService } from '../../posts.service';
+import { AccountModel } from './account.model';
+import {ModulesService} from '../../modules.service';
 
 @Component({
   selector: 'bg-accounts',
@@ -12,28 +11,25 @@ import {KRNAccount} from './account.model';
 })
 export class AccountsComponent implements OnInit {
 
-  accounts: KRNAccount[] = [];
+  accounts: AccountModel[] = [];
 
   constructor(private router: Router,
-              private postsService: PostsService) { }
+              private postsService: PostsService,
+              private modulesService: ModulesService) { }
 
   ngOnInit(): void {
-    console.log('accountOnInit');
-    const client = JSON.parse(localStorage.getItem('clientData'));
-    this.postsService.getAccountsPost(client.clientKey).subscribe( (data) => {
-      this.accounts = data;
-    }, error => {
-      console.log(error);
-    });
+    this.accounts = this.modulesService.loadAccountsData('/krn/accounts');
   }
 
-
-  addAccount(){
+  onAddAccount(){
     this.router.navigate(['/krn/createAccount']);
   }
 
-  deleteAccount(accountKey){
-    this.postsService.deleteAccountPost(accountKey).subscribe();
+  onDeleteAccount(accountKey){
+    this.postsService.deleteAccountPost(accountKey).subscribe(() => {
+      this.modulesService.reloadClientData();
+      this.accounts = this.modulesService.loadAccountsData('/krn/accounts');
+    });
   }
 
 }

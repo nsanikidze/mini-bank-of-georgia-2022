@@ -13,7 +13,7 @@ export class OperationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  movePmd(){
+  onTransfer(){
     this.router.navigate(['/pmd/pmd311']);
   }
 }

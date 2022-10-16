@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../shared/validators';
-import {KRNAccount} from '../../krn/accounts/account.model';
+import { AccountModel } from '../../krn/accounts/account.model';
 import {PostsService} from '../../posts.service';
 import {TransferModel} from './transfer.model';
 import {Router} from '@angular/router';
@@ -17,8 +17,8 @@ export class Pmd311Component implements OnInit {
   error;
   transferModel: TransferModel;
   pmd311Form: FormGroup;
-  senderAccounts: KRNAccount[] = [];
-  receiverAccounts: KRNAccount[] = [];
+  senderAccounts: AccountModel[] = [];
+  receiverAccounts: AccountModel[] = [];
   defaultText = 'აირჩიე';
   defaultValue = undefined;
 
@@ -28,15 +28,13 @@ export class Pmd311Component implements OnInit {
 
   ngOnInit(): void {
     const client = JSON.parse(localStorage.getItem('clientData'));
-    this.postsService.getAccountsPost(client.clientKey).subscribe( (data) => {
+    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
       this.senderAccounts = data;
-      console.log(data);
     }, error => {
       console.log(error);
     });
-    this.postsService.getAllAccountsPost().subscribe( (data) => {
+    this.postsService.getClientsAccountsPost().subscribe( (data) => {
       this.receiverAccounts = data;
-      console.log(data);
     }, error => {
       console.log(error);
     });

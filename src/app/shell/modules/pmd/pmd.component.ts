@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pmd.component.html',
   styleUrls: ['./pmd.component.scss']
 })
+
 export class PmdComponent implements OnInit {
 
   constructor() { }

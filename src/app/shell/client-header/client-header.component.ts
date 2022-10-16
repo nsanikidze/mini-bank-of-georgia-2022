@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterContentChecked, Component, } from '@angular/core';
 import {PostsService} from '../modules/posts.service';
 import {Client} from '../modules/client.model';
 import {Router} from '@angular/router';
@@ -8,29 +8,25 @@ import {Router} from '@angular/router';
   templateUrl: './client-header.component.html',
   styleUrls: ['./client-header.component.scss']
 })
-export class ClientHeaderComponent implements OnInit, AfterContentChecked {
+export class ClientHeaderComponent implements  AfterContentChecked {
 
   client: Client;
 
   constructor(private router: Router,
               private postsService: PostsService) { }
 
+
   ngAfterContentChecked(): void {
     this.client = JSON.parse(localStorage.getItem('clientData'));
   }
 
-
-  ngOnInit(): void {
-    this.client = JSON.parse(localStorage.getItem('clientData'));
-
-  }
-
-
-
-  clientLogout(){
+  onLogout(){
     localStorage.removeItem('clientData');
     this.router.navigate(['/bpm']);
   }
 
+  getColor() {
+    return this.client.sumAmount >  0 ? '#4CD04F' : 'transparent';
+  }
 
 }

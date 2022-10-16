@@ -15,12 +15,15 @@
           <span>plus:</span>
         </div>
         <div class="client-products-items-value">
-          <span>{{client.sumAmount}} GEL</span>
+          <span>
+            <span [ngStyle]="{'color':getColor()}">{{client.sumAmount }}</span>
+            GEL
+          </span>
           <span>{{client.plusPoints}}</span>
         </div>
       </div>
       <div class="logout-btn-item">
-        <button class="ui orange button logout-btn" (click)="clientLogout()">გასვლა</button>
+        <button class="ui orange button logout-btn" (click)="onLogout()">გასვლა</button>
       </div>
     </div>
   </div>

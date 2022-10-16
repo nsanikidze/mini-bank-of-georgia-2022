@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../shared/validators';
 import { Router } from '@angular/router';
 import {PostsService} from '../../posts.service';
+import {BpmClient} from '../bpm.model';
 
 @Component({
   selector: 'bg-bpm001',
@@ -12,43 +13,42 @@ import {PostsService} from '../../posts.service';
 export class Bpm001Component implements OnInit {
 
   clientRegistrationForm: FormGroup;
-  client: {
-    firstName: string,
-    lastName: string,
-    plusPoints: number
-  };
+  client: BpmClient;
 
   constructor(private postsService: PostsService,
               private router: Router) { }
 
+
   ngOnInit(): void {
     this.clientRegistrationForm = new FormGroup({
       name: new FormControl(undefined, [BgValidators.required,
-        BgValidators.minLength(2),
-        BgValidators.maxLength(30)]),
+                                                             BgValidators.minLength(2),
+                                                             BgValidators.maxLength(30)]),
       lastName: new FormControl(undefined, [BgValidators.required,
-              BgValidators.minLength(2),
-              BgValidators.maxLength(30)]),
-      plusPoints: new FormControl(undefined, [BgValidators.min(0)])
+                                                                 BgValidators.minLength(2),
+                                                                 BgValidators.maxLength(30)]),
+      plusPoints: new FormControl(undefined, [BgValidators.required,
+                                                                   BgValidators.min(0)])
       });
   }
 
-  OnSubmitForm(){
+  onAddClient(){
 
     if (this.clientRegistrationForm.invalid){
       return;
     }
+
     this.client = {
-      firstName: this.get('name').value,
+      name: this.get('name').value,
       lastName: this.get('lastName').value,
       plusPoints: this.get('plusPoints').value
     };
 
-    this.postsService.addClientPost(this.client).subscribe( () => {
+    this.postsService.createClientPost(this.client).subscribe( () => {
         this.router.navigate(['/bpm/bpm000']);
-      }
-    );
+      });
   }
+
 
   get(controlName){
     return this.clientRegistrationForm.get(controlName);
