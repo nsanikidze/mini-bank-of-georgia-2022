@@ -16,10 +16,10 @@
         </div>
         <div class="client-products-items-value">
           <span>
-            <span [ngStyle]="{'color':getColor()}">{{client.sumAmount }}</span>
+            <span [ngStyle]="{'color':getColor()}">{{ client.sumAmount | bgNumberFormat }}</span>
             GEL
           </span>
-          <span>{{client.plusPoints}}</span>
+          <span>{{client.plusPoints   }}</span>
         </div>
       </div>
       <div class="logout-btn-item">

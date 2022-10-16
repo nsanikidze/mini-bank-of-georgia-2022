@@ -3,6 +3,7 @@ import {PostsService} from './posts.service';
 import {Client} from './client.model';
 import {AccountModel} from './krn/accounts/account.model';
 import {Router} from '@angular/router';
+import {LoaderService} from '../../shared/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ModulesService{
   accounts: AccountModel[] = [];
 
   constructor(private postsService: PostsService,
-              private router: Router) { }
+              private router: Router,
+              private loaderService: LoaderService) { }
 
   reloadClientData(){
       const client = JSON.parse(localStorage.getItem('clientData'));
@@ -23,15 +25,4 @@ export class ModulesService{
       });
   }
 
-  loadAccountsData(path): AccountModel[] {
-    const client = JSON.parse(localStorage.getItem('clientData'));
-    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data: AccountModel[]) => {
-            this.accounts = data;
-            this.router.navigate([path]);
-          }, error => {
-            console.log(error);
-            return;
-          });
-    return this.accounts;
-  }
 }

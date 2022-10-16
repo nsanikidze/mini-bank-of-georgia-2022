@@ -10,7 +10,7 @@
       </button>
     </div>
     <table>
-      <div *ngIf="!accounts.length">ანგარიშები არ მოიძებნა</div>
+      <div *ngIf="!accounts.length" >ანგარიშები არ მოიძებნა</div>
       <thead  *ngIf="accounts.length">
       <th>მფლობელი</th>
       <th>სახელი</th>
@@ -21,7 +21,7 @@
       <tr class="account"  >
         <td>{{account.clientFirstName}} {{account.clientLastName}} </td>
         <td>{{account.accountName}}</td>
-        <td>{{account.amount}}</td>
+        <td>{{account.amount | bgNumberFormat}}</td>
         <td (click)="onDeleteAccount(account.accountKey)" >
           <i class="trash icon"></i>
         </td>

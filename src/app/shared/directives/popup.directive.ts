@@ -7,12 +7,11 @@ export class PopupDirective {
 
   @HostBinding('class.active') isActive = false;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {
+  }
 
   @HostListener('document:click', ['$event']) onClick($event){
     this.isActive = this.elementRef.nativeElement.contains($event.target) ? !this.isActive : false;
   }
-
-
 
 }

@@ -24,7 +24,7 @@ export class AuthService {
     return this.http
       .post<AuthResponseModel>('register', {
         name,
-        userName,
+        username: userName,
         password,
       })
       .pipe(

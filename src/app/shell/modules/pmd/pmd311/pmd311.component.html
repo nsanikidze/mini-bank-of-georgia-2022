@@ -13,7 +13,7 @@
                 {{defaultText}}
               </option>
               <option *ngFor="let senderAccount of senderAccounts" [ngValue]="senderAccount.accountKey">
-                {{senderAccount.accountKey}} – {{senderAccount.amount}}GEL ({{senderAccount.accountName}})
+                {{senderAccount.accountKey}} – {{senderAccount.amount | bgNumberFormat}}GEL ({{senderAccount.accountName}})
               </option>
             </select>
           </div>
@@ -32,7 +32,7 @@
               </option>
               <option *ngFor="let receiverAccount of receiverAccounts" [ngValue]="receiverAccount.accountKey">
                 {{ receiverAccount.accountName}}
-                {{receiverAccount.accountKey}} – {{receiverAccount.amount}}GEL ({{receiverAccount.clientFirstName}} {{receiverAccount.clientLastName}})
+                {{receiverAccount.accountKey}} – {{receiverAccount.amount | bgNumberFormat }}GEL ({{receiverAccount.clientFirstName}} {{receiverAccount.clientLastName}})
               </option>
             </select>
           </div>

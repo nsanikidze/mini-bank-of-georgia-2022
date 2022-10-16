@@ -1,8 +1,6 @@
-import {AbstractControl, FormControl, Validators} from '@angular/forms';
-import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
+import { FormControl, Validators} from '@angular/forms';
 
 export class BgValidators extends Validators {
-
 
   static required(control){
     return super.required(control) ? { required: 'ველი აუცილებელია'} : undefined;

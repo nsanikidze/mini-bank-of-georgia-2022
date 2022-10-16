@@ -2,6 +2,7 @@ import {AfterContentChecked, Component, } from '@angular/core';
 import {PostsService} from '../modules/posts.service';
 import {Client} from '../modules/client.model';
 import {Router} from '@angular/router';
+import {NumberFormatPipe} from '../../shared/number-format.pipe';
 
 @Component({
   selector: 'bg-client-header',
@@ -12,8 +13,7 @@ export class ClientHeaderComponent implements  AfterContentChecked {
 
   client: Client;
 
-  constructor(private router: Router,
-              private postsService: PostsService) { }
+  constructor(private router: Router) { }
 
 
   ngAfterContentChecked(): void {
@@ -26,7 +26,7 @@ export class ClientHeaderComponent implements  AfterContentChecked {
   }
 
   getColor() {
-    return this.client.sumAmount >  0 ? '#4CD04F' : 'transparent';
+    return this.client.sumAmount >= 0 ? '#4CD04F' : 'red';
   }
 
 }

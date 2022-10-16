@@ -18,7 +18,18 @@ export class AccountsComponent implements OnInit {
               private modulesService: ModulesService) { }
 
   ngOnInit(): void {
-    this.accounts = this.modulesService.loadAccountsData('/krn/accounts');
+    console.log('reload');
+    this.fetchAccounts();
+  }
+
+  fetchAccounts(){
+    const client = JSON.parse(localStorage.getItem('clientData'));
+    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
+      this.accounts = data;
+    }, error => {
+      console.log(error);
+    });
+
   }
 
   onAddAccount(){
@@ -28,7 +39,7 @@ export class AccountsComponent implements OnInit {
   onDeleteAccount(accountKey){
     this.postsService.deleteAccountPost(accountKey).subscribe(() => {
       this.modulesService.reloadClientData();
-      this.accounts = this.modulesService.loadAccountsData('/krn/accounts');
+      this.fetchAccounts();
     });
   }
 

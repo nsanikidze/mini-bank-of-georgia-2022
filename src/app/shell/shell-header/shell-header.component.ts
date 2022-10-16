@@ -20,7 +20,6 @@ export class ShellHeaderComponent implements OnInit {
   logout(){
     console.log(2);
     this.shell.isUserLoggedIn = false;
-
     this.auth.logout();
   }
 
