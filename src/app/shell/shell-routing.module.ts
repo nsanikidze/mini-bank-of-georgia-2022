@@ -13,18 +13,15 @@ const routes: Routes = [
       {
         path: 'bpm',
         loadChildren: () => import('./modules/bpm/bpm.module').then((m) => m.BpmModule),
-        data: { preload: true },
       },
       {
         path: 'krn',
         loadChildren: () => import('./modules/krn/krn.module').then((m) => m.KrnModule),
-        data: { preload: true },
         canActivate: [ClientGuard]
       },
       {
         path: 'pmd',
         loadChildren: () => import('./modules/pmd/pmd.module').then((m) => m.PmdModule),
-        data: { preload: true },
         canActivate: [ClientGuard]
       },
       {

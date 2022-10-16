@@ -42,7 +42,7 @@ export class BgValidators extends Validators {
       }
 
   }*/
-  
+
 
   static controlValurMatchedValidator(control1, control2) {
     return (formGroup) =>

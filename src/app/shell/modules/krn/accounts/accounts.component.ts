@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../posts.service';
 import { AccountModel } from './account.model';
 import {ModulesService} from '../../modules.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'bg-accounts',
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
-export class AccountsComponent implements OnInit {
+export class AccountsComponent implements OnInit, OnDestroy {
 
   accounts: AccountModel[] = [];
+  ferchAcctSubscription: Subscription;
+  deleteAcctSubscription: Subscription;
 
   constructor(private router: Router,
               private postsService: PostsService,
@@ -24,7 +27,7 @@ export class AccountsComponent implements OnInit {
 
   fetchAccounts(){
     const client = JSON.parse(localStorage.getItem('clientData'));
-    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
+    this.ferchAcctSubscription = this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
       this.accounts = data;
     }, error => {
       console.log(error);
@@ -37,10 +40,15 @@ export class AccountsComponent implements OnInit {
   }
 
   onDeleteAccount(accountKey){
-    this.postsService.deleteAccountPost(accountKey).subscribe(() => {
+    this.deleteAcctSubscription = this.postsService.deleteAccountPost(accountKey).subscribe(() => {
       this.modulesService.reloadClientData();
       this.fetchAccounts();
     });
+  }
+
+  ngOnDestroy() {
+    this.ferchAcctSubscription.unsubscribe();
+    this.deleteAcctSubscription.unsubscribe();
   }
 
 }

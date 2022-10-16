@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BpmClient} from '../bpm.model';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {PostsService} from '../../posts.service';
 import {Client} from '../../client.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'bg-bpm000',
   templateUrl: './bpm000.component.html',
   styleUrls: ['./bpm000.component.scss']
 })
-export class Bpm000Component implements OnInit {
+export class Bpm000Component implements OnInit, OnDestroy{
 
   clients: Client[] = [];
   isSearchActive = false;
   clientSearchForm: FormGroup;
+  subscription: Subscription;
 
   constructor(private router: Router,
               private postsService: PostsService) { }
@@ -35,7 +37,7 @@ export class Bpm000Component implements OnInit {
     const lastName = this.get('lastName').value;
     const clientKey = this.get('clientKey').value;
 
-    this.postsService.fetchClientsPost(name, lastName, clientKey).subscribe( (data) => {
+    this.subscription = this.postsService.fetchClientsPost(name, lastName, clientKey).subscribe( (data) => {
       this.clients = data;
     }, error => {
       console.log(error);
@@ -55,5 +57,9 @@ export class Bpm000Component implements OnInit {
 
   get(controlName){
     return this.clientSearchForm.get(controlName);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

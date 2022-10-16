@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LoaderService} from '../loader/loader.service';
 import {AuthResponseModel} from './auth-response.model';
-import {BehaviorSubject, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription, throwError} from 'rxjs';
 import {User} from './user.model';
 import {catchError, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  timer = 2000;
+  timer: number;
 
   user = new BehaviorSubject<User>(undefined);
 
@@ -52,9 +52,7 @@ export class AuthService {
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
     localStorage.removeItem('clientData');
-    if (this.timer) {
-      clearTimeout(this.timer);
-    }
+    clearInterval(this.timer);
     this.timer = undefined;
   }
 
@@ -89,6 +87,18 @@ export class AuthService {
       return;
     }
     this.user.next(user);
+  }
+
+  autoLogout(expDate) {
+    /*this.timer = setInterval( () => {
+      const currentDate = new Date;
+      if (expDate <= currentDate) {
+        this.logout();
+      }
+    }, 10000);  */  // ეს იქნება სწორი , თუ expDate-ს მინდა შეხედოს
+    this.timer = setInterval( () => {
+      this.logout();
+    }, 1500000); //15 წუთის შემდეგ ავტომატურად დალოგაუთდება
   }
 
 }

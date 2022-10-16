@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BgValidators} from '../../../../shared/validators';
 import { Router } from '@angular/router';
 import {PostsService} from '../../posts.service';
 import {BpmClient} from '../bpm.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'bg-bpm001',
   templateUrl: './bpm001.component.html',
   styleUrls: ['./bpm001.component.scss']
 })
-export class Bpm001Component implements OnInit {
+export class Bpm001Component implements OnInit , OnDestroy{
 
   clientRegistrationForm: FormGroup;
   client: BpmClient;
+  subscription: Subscription;
 
   constructor(private postsService: PostsService,
               private router: Router) { }
@@ -44,7 +46,7 @@ export class Bpm001Component implements OnInit {
       plusPoints: this.get('plusPoints').value
     };
 
-    this.postsService.createClientPost(this.client).subscribe( () => {
+    this.subscription = this.postsService.createClientPost(this.client).subscribe( () => {
         this.router.navigate(['/bpm/bpm000']);
       });
   }
@@ -58,6 +60,10 @@ export class Bpm001Component implements OnInit {
     if (this.get(controlName).errors){
       return Object.values(this.get(controlName).errors);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

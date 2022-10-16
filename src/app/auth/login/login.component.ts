@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(userName, password).subscribe(
       resData => {
+        this.auth.autoLogout( new Date(resData.expirationDate));
         this.router.navigate(['/bpm']);
       },
       error => {

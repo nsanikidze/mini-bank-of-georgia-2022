@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from '../../../posts.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -9,16 +9,18 @@ import {take} from 'rxjs/operators';
 import {Client} from '../../../client.model';
 import {ModulesService} from '../../../modules.service';
 import {InputAccountMoldel} from '../input-account.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'bg-create-account',
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.scss']
 })
-export class CreateAccountComponent implements OnInit {
+export class CreateAccountComponent implements OnInit, OnDestroy {
 
   accountCreatorForm: FormGroup;
   account: InputAccountMoldel;
+  subscription: Subscription;
 
   constructor(private postsService: PostsService,
               private router: Router,
@@ -44,7 +46,7 @@ export class CreateAccountComponent implements OnInit {
       accountName: this.get('accountName').value,
       amount: this.get('amount').value
     };
-    this.postsService.createAccountPost(this.account).subscribe( () => {
+    this.subscription = this.postsService.createAccountPost(this.account).subscribe( () => {
       this.modulesService.reloadClientData();
       this.router.navigate(['/krn/accounts']);
       }
@@ -59,6 +61,10 @@ export class CreateAccountComponent implements OnInit {
     if (this.get(controlName).errors){
       return Object.values(this.get(controlName).errors);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 
