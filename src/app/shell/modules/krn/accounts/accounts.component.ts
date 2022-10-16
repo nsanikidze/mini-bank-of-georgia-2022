@@ -10,11 +10,9 @@ import {Subscription} from 'rxjs';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
-export class AccountsComponent implements OnInit, OnDestroy {
+export class AccountsComponent implements OnInit {
 
   accounts: AccountModel[] = [];
-  ferchAcctSubscription: Subscription;
-  deleteAcctSubscription: Subscription;
 
   constructor(private router: Router,
               private postsService: PostsService,
@@ -27,7 +25,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
 
   fetchAccounts(){
     const client = JSON.parse(localStorage.getItem('clientData'));
-    this.ferchAcctSubscription = this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
+    this.postsService.getClientAccountsPost(client.clientKey).subscribe( (data) => {
       this.accounts = data;
     }, error => {
       console.log(error);
@@ -40,15 +38,11 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
 
   onDeleteAccount(accountKey){
-    this.deleteAcctSubscription = this.postsService.deleteAccountPost(accountKey).subscribe(() => {
+      this.postsService.deleteAccountPost(accountKey).subscribe(() => {
       this.modulesService.reloadClientData();
       this.fetchAccounts();
     });
   }
 
-  ngOnDestroy() {
-    this.ferchAcctSubscription.unsubscribe();
-    this.deleteAcctSubscription.unsubscribe();
-  }
 
 }

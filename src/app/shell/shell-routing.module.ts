@@ -1,5 +1,5 @@
 import {ShellComponent} from './shell.component';
-import {AuthGuard} from '../shared/auth-guard.guard';
+import {AuthGuard} from '../shared/authorization/auth-guard.guard';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {ClientGuard} from './client-guard.guard';

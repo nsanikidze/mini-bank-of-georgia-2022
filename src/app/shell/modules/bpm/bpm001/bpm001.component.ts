@@ -16,6 +16,7 @@ export class Bpm001Component implements OnInit , OnDestroy{
   clientRegistrationForm: FormGroup;
   client: BpmClient;
   subscription: Subscription;
+  isFormSaved = false;
 
   constructor(private postsService: PostsService,
               private router: Router) { }
@@ -35,6 +36,7 @@ export class Bpm001Component implements OnInit , OnDestroy{
   }
 
   onAddClient(){
+    this.isFormSaved = true;
 
     if (this.clientRegistrationForm.invalid){
       return;

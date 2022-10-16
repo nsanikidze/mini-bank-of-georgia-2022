@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BpmComponent } from './bpm.component';
 import { Bpm000Component } from './bpm000/bpm000.component';
 import { Bpm001Component } from './bpm001/bpm001.component';
-import { AuthGuard } from '../../../shared/auth-guard.guard';
+import { AuthGuard } from '../../../shared/authorization/auth-guard.guard';
 
 
 const routes: Routes = [

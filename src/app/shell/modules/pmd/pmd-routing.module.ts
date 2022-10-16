@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from '../../../shared/auth-guard.guard';
+import {AuthGuard} from '../../../shared/authorization/auth-guard.guard';
 import {ClientGuard} from '../../client-guard.guard';
 import {Pmd311Component} from './pmd311/pmd311.component';
 import {PmdComponent} from './pmd.component';
